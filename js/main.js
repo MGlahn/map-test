@@ -4,6 +4,12 @@ var map = L.map('map', {
     zoomControl: false
 });
 
+map.setView([51.51032167, -0.187084072], 13);
+
+L.marker([51.5, -0.09]).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();
+
 var defaultLayer = L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
 var baseLayers = {
@@ -33,14 +39,14 @@ var baseLayers = {
 };
 
 var overlayLayers = {
-//    'OpenSeaMap': L.tileLayer.provider('OpenSeaMap'),
-//    'OpenWeatherMap Precipitation': L.tileLayer.provider('OpenWeatherMap.Precipitation'),
-//    'OpenWeatherMap PrecipitationClassic': L.tileLayer.provider('OpenWeatherMap.PrecipitationClassic'),
-//    'OpenWeatherMap Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
-//    'OpenWeatherMap RainClassic': L.tileLayer.provider('OpenWeatherMap.RainClassic'),
-//    'OpenWeatherMap Pressure': L.tileLayer.provider('OpenWeatherMap.Pressure'),
-//    'OpenWeatherMap Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
-//    'OpenWeatherMap Snow': L.tileLayer.provider('OpenWeatherMap.Snow')
+    //    'OpenSeaMap': L.tileLayer.provider('OpenSeaMap'),
+    //    'OpenWeatherMap Precipitation': L.tileLayer.provider('OpenWeatherMap.Precipitation'),
+    //    'OpenWeatherMap PrecipitationClassic': L.tileLayer.provider('OpenWeatherMap.PrecipitationClassic'),
+    //    'OpenWeatherMap Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
+    //    'OpenWeatherMap RainClassic': L.tileLayer.provider('OpenWeatherMap.RainClassic'),
+    //    'OpenWeatherMap Pressure': L.tileLayer.provider('OpenWeatherMap.Pressure'),
+    //    'OpenWeatherMap Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
+    //    'OpenWeatherMap Snow': L.tileLayer.provider('OpenWeatherMap.Snow')
 };
 
 var layerControl = L.control.layers(baseLayers, overlayLayers, {
@@ -57,3 +63,33 @@ function resizeLayerControl() {
 }
 map.on('resize', resizeLayerControl);
 resizeLayerControl();
+
+//Define an array of Latlng objects (points along the line)
+var polylinePoints = [
+            new L.LatLng(51.51032167, -0.187084072),
+            new L.LatLng(51.51019814, -0.187030437),
+            new L.LatLng(51.51013137, -0.187845822),
+            new L.LatLng(51.50457546, -0.185415744),
+            new L.LatLng(51.50476244, -0.181875224),
+            new L.LatLng(51.50457546, -0.179622177),
+            new L.LatLng(51.50409462, -0.175459380),
+            new L.LatLng(51.50368057, -0.174365042),
+            new L.LatLng(51.50299938, -0.174729820),
+            new L.LatLng(51.50213117, -0.174686903),
+            new L.LatLng(51.50199760, -0.177412030),
+            new L.LatLng(51.50179725, -0.180373197),
+            new L.LatLng(51.50143660, -0.180351735),
+         ];
+
+var polylineOptions = {
+    color: 'blue',
+    weight: 6,
+    opacity: 0.9
+};
+
+var polyline = new L.Polyline(polylinePoints, polylineOptions);
+
+map.addLayer(polyline);
+
+// zoom the map to the polyline
+map.fitBounds(polyline.getBounds());
