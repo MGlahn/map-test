@@ -1,19 +1,6 @@
-console.log('hello from layers');
-
-//
-//
-//var layers = {
-//    defaultLayerString: 'OpenStreetMap.Mapnik',
-//    baseLayers: baseLayers,
-//    overlayLayers: overlayLayers
-//};
-//
-
-
 var addLayerControl = function(defaultLayerString){
-    console.log('add layercontrol');
     var defaultLayer = L.tileLayer.provider(defaultLayerString).addTo(map);
-    
+
     var baseLayers = {
         'OpenStreetMap Default': defaultLayer,
         'OpenStreetMap German Style': L.tileLayer.provider('OpenStreetMap.DE'),
@@ -26,7 +13,6 @@ var addLayerControl = function(defaultLayerString){
         'MapQuest OSM': L.tileLayer.provider('MapQuestOpen.OSM'),
         'MapQuest Aerial': L.tileLayer.provider('MapQuestOpen.Aerial'),
         'Stamen Toner': L.tileLayer.provider('Stamen.Toner'),
-        'Stamen Terrain': L.tileLayer.provider('Stamen.Terrain'),
         'Stamen Watercolor': L.tileLayer.provider('Stamen.Watercolor'),
         'Esri WorldStreetMap': L.tileLayer.provider('Esri.WorldStreetMap'),
         'Esri DeLorme': L.tileLayer.provider('Esri.DeLorme'),
@@ -50,6 +36,7 @@ var addLayerControl = function(defaultLayerString){
         //    'OpenWeatherMap Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
         //    'OpenWeatherMap Snow': L.tileLayer.provider('OpenWeatherMap.Snow')
     };
+
     var layerControl = L.control.layers(baseLayers, overlayLayers, {
         collapsed: false
     }).addTo(map);
@@ -58,7 +45,6 @@ var addLayerControl = function(defaultLayerString){
     function resizeLayerControl() {
         var layerControlHeight = document.body.clientHeight - (10 + 50);
         var layerControl = document.getElementsByClassName('leaflet-control-layers-expanded')[0];
-
         layerControl.style.overflowY = 'auto';
         layerControl.style.maxHeight = layerControlHeight + 'px';
     }
