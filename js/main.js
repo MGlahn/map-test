@@ -11,4 +11,4 @@ addLayerControl(defaultLayerString);
 //makePolyLine('js/points.json', addPolylineToMap);
 //makePolyLine('js/points2.json', addPolylineToMap);
 
-makeAnimatedPolyLineFromFile('js/points.json');
+makeAnimatedPolyLineFromFile('js/points.json', addAnimatedPolylineToMap);
