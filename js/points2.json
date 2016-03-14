@@ -2,11 +2,13 @@
     "points": [
         {
             "lat": "45.828799",
-            "lng": "-56.250000"
+            "lng": "-56.250000",
+            "harbour": "some start harbour"
         },
         {
             "lat": "50.736455",
-            "lng": "-10.898438"
+            "lng": "-10.898438",
+            "harbour": "some end harbour"
         }
     ]
 }

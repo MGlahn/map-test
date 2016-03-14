@@ -4,13 +4,6 @@ var addMarker = function (latLng, msg) {
         .openPopup();
 };
 
-var addPolylineToMap = function (polylinePoints, polylineOptions) {
-    var polyline = new L.Polyline(polylinePoints, polylineOptions);
-    map.addLayer(polyline);
-    // zoom the map to the polyline
-    map.fitBounds(polyline.getBounds());
-};
-
 var addAnimatedPolylineToMap = function (latlngs, options, start, end) {
     var path = L.polyline(latlngs, options);
     map.fitBounds(path.getBounds());
@@ -41,25 +34,6 @@ var makeAnimatedPolyLineFromFile = function (fileString, callback) {
             });
             //callback to addAnimatedPolylineToMap
             callback(latlngs, polylineOptions, start, end);
-        })
-        .fail(function () {
-            console.log("could not load the file");
-        });
-};
-
-
-
-var makePolyLine = function (fileString, callback) {
-    var newPolyLinePoints = [];
-    $.getJSON(fileString)
-        .done(function (data) {
-            $.each(data.points, function (index) {
-                newPolyLinePoints.push(new L.LatLng(data.points[index].lat, data.points[index].lng));
-            });
-            if (typeof callback === "function") {
-                // callback to addNewPolyline to add the line to the map
-                callback(newPolyLinePoints, polylineOptions);
-            }
         })
         .fail(function () {
             console.log("could not load the file");
